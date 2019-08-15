@@ -62,7 +62,7 @@ public class ZkSpringBootConfiguration implements WebMvcConfigurer {
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");//,"classpath:/resources/webapp/WEB-INF/views/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");//.addResourceLocations("classpath:/resources/templates/");//,"classpath:/resources/webapp/WEB-INF/views/");
         //registry.addResourceHandler("/**");
         //registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/static/");
     }
