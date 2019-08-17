@@ -12,10 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
@@ -33,6 +29,7 @@ public class ZkSpringBootConfiguration{
     //@ConfigurationProperties(prefix = "c3p0")
     public DataSource getDataSource(){
     	//DruidDataSource dataSource = new DruidDataSource();
+    	System.out.println("初始化数据源");
     	ComboPooledDataSource dataSource= org.springframework.boot.jdbc.DataSourceBuilder.create().type(ComboPooledDataSource.class).build();
     	dataSource.setJdbcUrl(env.getProperty("spring.datasource.url"));
         dataSource.setUser(env.getProperty("spring.datasource.username"));
@@ -43,6 +40,7 @@ public class ZkSpringBootConfiguration{
 			e.printStackTrace();
 			return null;
 		}
+        System.out.println("datasource:"+(dataSource!=null)+"   env:"+(env!=null));
         dataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("spring.datasource.initial-pool-size")));
         dataSource.setMinPoolSize(Integer.parseInt(env.getProperty("spring.datasource.min-pool-size")));
         dataSource.setMaxPoolSize(Integer.parseInt(env.getProperty("spring.datasource.max-pool-size")));

@@ -22,7 +22,6 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<jackson.version>2.9.6</jackson.version>
 	</properties>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -54,6 +53,8 @@
 <!-- 				</configuration> -->
 			</plugin>
 		</plugins>
+		<!-- 编译后的包名称 -->
+		<finalName>zkweb</finalName>
 	</build>
 	<dependencies>
 		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starters</artifactId> 
