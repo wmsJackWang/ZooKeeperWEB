@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -32,8 +33,10 @@ public class ZkSpringBootConfiguration implements WebMvcConfigurer {
     @Primary
     //@ConfigurationProperties(prefix = "c3p0")
     public DataSource getDataSource(){
+    	System.out.println("初始化数据源");
     	//DruidDataSource dataSource = new DruidDataSource();
-    	ComboPooledDataSource dataSource= org.springframework.boot.jdbc.DataSourceBuilder.create().type(ComboPooledDataSource.class).build();
+    	ComboPooledDataSource dataSource= DataSourceBuilder.create().type(ComboPooledDataSource.class).build();
+    	System.out.println("dataSource==null:"+dataSource==null);
     	dataSource.setJdbcUrl(env.getProperty("spring.datasource.url"));
         dataSource.setUser(env.getProperty("spring.datasource.username"));
         dataSource.setPassword(env.getProperty("spring.datasource.password"));
