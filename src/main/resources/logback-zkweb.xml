@@ -14,7 +14,7 @@ debug:
 		<timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/> 
 		<property name="APP_Name" value="myAppName" />   
 -->
-	<property name="path.log" value="./log" />   
+<!-- 	<property name="path.log" value="./log" />    -->
 <!--     <appender name="FILE"   class="ch.qos.logback.core.FileAppender"> -->
 <!--     	<Encoding>UTF-8</Encoding> -->
 <!--         <File>logger-default.log</File> -->
