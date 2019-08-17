@@ -23,9 +23,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
-public class ZkSpringBootConfiguration implements WebMvcConfigurer {
-//	@Autowired
-//    private Environment env;
+public class ZkSpringBootConfiguration{
+	@Autowired
+    private Environment env;
 	
     @Bean(name = "dataSource")
     @Qualifier(value = "dataSource")
@@ -34,39 +34,28 @@ public class ZkSpringBootConfiguration implements WebMvcConfigurer {
     public DataSource getDataSource(){
     	//DruidDataSource dataSource = new DruidDataSource();
     	ComboPooledDataSource dataSource= org.springframework.boot.jdbc.DataSourceBuilder.create().type(ComboPooledDataSource.class).build();
-//    	dataSource.setJdbcUrl(env.getProperty("spring.datasource.url"));
-//        dataSource.setUser(env.getProperty("spring.datasource.username"));
-//        dataSource.setPassword(env.getProperty("spring.datasource.password"));
-//        try {
-//			dataSource.setDriverClass(env.getProperty("spring.datasource.driver-class-name"));
-//		} catch (PropertyVetoException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//        dataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("spring.datasource.initial-pool-size")));
-//        dataSource.setMinPoolSize(Integer.parseInt(env.getProperty("spring.datasource.min-pool-size")));
-//        dataSource.setMaxPoolSize(Integer.parseInt(env.getProperty("spring.datasource.max-pool-size")));
-//        dataSource.setAcquireIncrement(Integer.parseInt(env.getProperty("spring.datasource.acquire-increment")));
-//        dataSource.setIdleConnectionTestPeriod(Integer.parseInt(env.getProperty("spring.datasource.idle-connection-test-period")));
-//        dataSource.setMaxIdleTime(Integer.parseInt(env.getProperty("spring.datasource.max-idle-time")));
-//        dataSource.setMaxStatements(Integer.parseInt(env.getProperty("spring.datasource.max-statements")));
-//        dataSource.setAcquireRetryAttempts(Integer.parseInt(env.getProperty("spring.datasource.acquire-retry-attempts")));
-//        dataSource.setBreakAfterAcquireFailure(Boolean.parseBoolean(env.getProperty("spring.datasource.break-after-acquire-failure")));
+    	dataSource.setJdbcUrl(env.getProperty("spring.datasource.url"));
+        dataSource.setUser(env.getProperty("spring.datasource.username"));
+        dataSource.setPassword(env.getProperty("spring.datasource.password"));
+        try {
+			dataSource.setDriverClass(env.getProperty("spring.datasource.driver-class-name"));
+		} catch (PropertyVetoException e) {
+			e.printStackTrace();
+			return null;
+		}
+        dataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("spring.datasource.initial-pool-size")));
+        dataSource.setMinPoolSize(Integer.parseInt(env.getProperty("spring.datasource.min-pool-size")));
+        dataSource.setMaxPoolSize(Integer.parseInt(env.getProperty("spring.datasource.max-pool-size")));
+        dataSource.setAcquireIncrement(Integer.parseInt(env.getProperty("spring.datasource.acquire-increment")));
+        dataSource.setIdleConnectionTestPeriod(Integer.parseInt(env.getProperty("spring.datasource.idle-connection-test-period")));
+        dataSource.setMaxIdleTime(Integer.parseInt(env.getProperty("spring.datasource.max-idle-time")));
+        dataSource.setMaxStatements(Integer.parseInt(env.getProperty("spring.datasource.max-statements")));
+        dataSource.setAcquireRetryAttempts(Integer.parseInt(env.getProperty("spring.datasource.acquire-retry-attempts")));
+        dataSource.setBreakAfterAcquireFailure(Boolean.parseBoolean(env.getProperty("spring.datasource.break-after-acquire-failure")));
         return dataSource;
     }
     
-    @Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-    	registry.addViewController("/").setViewName("home");
-	}
-    
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");//.addResourceLocations("classpath:/resources/templates/");//,"classpath:/resources/webapp/WEB-INF/views/");
-        //registry.addResourceHandler("/**");
-        //registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/static/");
-    }
-    
+   
     @Bean
     public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
@@ -83,16 +72,7 @@ public class ZkSpringBootConfiguration implements WebMvcConfigurer {
         return lci;
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(localeChangeInterceptor());
-        // 拦截/freemarker后路径
-     	//registry.addInterceptor(new JoeInterceptor()).addPathPatterns("/freemarker/**");
-        // addPathPatterns 用于添加拦截规则
-        // excludePathPatterns 用户排除拦截
-        //registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**").excludePathPatterns("/zk","/zkcfg");
-    }
-    
+       
 //    @Bean
 //    public MessageSource messageSource() {
 //        //logger.info("MessageSource");
