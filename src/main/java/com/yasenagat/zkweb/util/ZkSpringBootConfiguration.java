@@ -74,6 +74,7 @@ public class ZkSpringBootConfiguration implements WebMvcConfigurer {
     public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
         // 默认语言
+        System.out.println("设置中国语言");
         slr.setDefaultLocale(Locale.CHINA);
         return slr;
     }
