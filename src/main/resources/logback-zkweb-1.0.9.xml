@@ -34,8 +34,8 @@
         </RollingFile>
     </appenders>
     <loggers>
-        <logger name="org.springframework" level="INFO"/>
-        <logger name="org.mybatis" level="INFO"/>
+        <logger name="org.springframework" level="ERROR"/>
+        <logger name="org.mybatis" level="ERROR"/>
         <logger name="org.apache.zookeeper" level="ERROR"/>
         <root level="all">
             <!--<appender-ref ref="Console"/>-->

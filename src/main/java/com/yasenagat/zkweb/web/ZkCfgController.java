@@ -35,6 +35,7 @@ public class ZkCfgController{
 		try {
 			log.info(new Date()+"");
 			Map<String, Object> _map = new HashMap<String, Object>();
+			whereSql = "";
 			_map.put("rows", zkCfgManager.query(page,rows,URLDecoder.decode(whereSql,"utf-8")));
 			_map.put("total", zkCfgManager.count());
 			return _map;
@@ -51,7 +52,11 @@ public class ZkCfgController{
 			@RequestParam(required=false) String connectstr,
 			@RequestParam(required=false) String sessiontimeout){
 		
+
 		try {
+			desc = URLDecoder.decode(desc,"utf-8");
+			connectstr = URLDecoder.decode(connectstr,"utf-8");
+			sessiontimeout = URLDecoder.decode(sessiontimeout,"utf-8");
 			//String id = UUID.randomUUID().toString().replaceAll("-", "");
 			String id = UUID.randomUUID().toString();
 			ZkManager zkManager;

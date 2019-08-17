@@ -44,16 +44,20 @@ spring:
     #可解析的视图名称列表，用逗号分隔
     #view-names: 
   datasource:
-    platform: h2
+    platform: mysql
     type: com.mchange.v2.c3p0.ComboPooledDataSource
+    url: jdbc:mysql://192.168.3.9:3306/zkweb?characterEncoding=GBK&useSSL=false
 #    url: jdbc:h2:file:~/.h2/zkweb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=SOCKET
 #    url: jdbc:h2:file:/usr/local/h2/zkweb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=SOCKET
 #    url: jdbc:h2:file:/data/zkweb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=SOCKET
 #    url: jdbc:h2:~/.h2/zkweb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=SOCKET
-    url: jdbc:h2:~/h2/zkweb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=SOCKET
-    username: sa
-    password: sa
-    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:~/h2/zkweb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=SOCKET
+#    username: sa
+#    password: sa
+    username: jackdking
+    password: ncl@1234
+#    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     initial-pool-size: 10
     min-pool-size: 5
     max-pool-size: 20

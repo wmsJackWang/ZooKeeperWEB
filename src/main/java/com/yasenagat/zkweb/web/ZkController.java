@@ -23,6 +23,7 @@ import com.yasenagat.zkweb.model.Tree;
 import com.yasenagat.zkweb.model.TreeRoot;
 import com.yasenagat.zkweb.util.ZkCache;
 import com.yasenagat.zkweb.util.ZkCfgFactory;
+import com.yasenagat.zkweb.util.ZkManager;
 import com.yasenagat.zkweb.util.ZkManager.PropertyPanel;
 
 @Controller
@@ -70,8 +71,14 @@ public class ZkController implements DisposableBean{
 	@RequestMapping(value="/queryZKOk")
 	public @ResponseBody String queryZKOk(Model model,@RequestParam(required=true) String cacheId){
 		String exmsg="<font color='red'>Disconnected Or Exception</font>";
+		
+		if(null==cacheId||"".equals(cacheId))return "<font color='blue'>ID 参数为空</font>";
+		//从缓存中获取
+		ZkManager zkManager = ZkCache.get(cacheId);
+		if(zkManager==null)
+			return "<font color='blue'>缓存里不存在:"+cacheId+"</font>";
 		try {
-			if(ZkCache.get(cacheId).getData("/",false)!=null) {
+			if(zkManager.getData("/",false)!=null) {
 				//log.info("cacheId[{}] : {}",cacheId,"Connected");
 				return "<font color='blue'>Connected</font>";
 			}

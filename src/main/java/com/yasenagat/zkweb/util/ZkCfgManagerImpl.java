@@ -128,7 +128,7 @@ public class ZkCfgManagerImpl implements InitializingBean,ZkCfgManager {
 	}
 
 	public List<Map<String, Object>> query() {
-		List<Map<String, Object>> result=query("where not(desc like 'ignore_%')");
+		List<Map<String, Object>> result=query("where not(`desc` like 'ignore_%')");
 		if(result==null)
 			return new ArrayList<Map<String,Object>>();
 		return result;
@@ -189,7 +189,7 @@ public class ZkCfgManagerImpl implements InitializingBean,ZkCfgManager {
 			String sessionTimeOut) {
 		PreparedStatement ps = null;
 		try {
-			ps = getConnection().prepareStatement("UPDATE ZK SET DESC=?,CONNECTSTR=?,SESSIONTIMEOUT=? WHERE ID=?;");
+			ps = getConnection().prepareStatement("UPDATE ZK SET `DESC`=?,CONNECTSTR=?,SESSIONTIMEOUT=? WHERE ID=?;");
 			ps.setString(1, desc);
 			ps.setString(2, connectStr);
 			ps.setString(3, sessionTimeOut);
@@ -217,7 +217,7 @@ public class ZkCfgManagerImpl implements InitializingBean,ZkCfgManager {
 		
 		PreparedStatement ps = null;
 		try {
-			ps = getConnection().prepareStatement("DELETE ZK WHERE ID=?");
+			ps = getConnection().prepareStatement("DELETE FROM ZK WHERE ID=?");
 			ps.setString(1, id);
 			return ps.executeUpdate()>0;
 		} catch (Exception e) {
@@ -339,6 +339,7 @@ public class ZkCfgManagerImpl implements InitializingBean,ZkCfgManager {
 			ps.setString(2, desc);
 			ps.setString(3, connectStr);
 			ps.setString(4, sessionTimeOut);
+			System.out.println(id+desc+connectStr+sessionTimeOut);
 			return ps.executeUpdate()>0;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -395,7 +396,7 @@ public class ZkCfgManagerImpl implements InitializingBean,ZkCfgManager {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			 ps = getConnection().prepareStatement("SELECT ID,DESC,CONNECTSTR,SESSIONTIMEOUT FROM ZK where 1=0");
+			 ps = getConnection().prepareStatement("SELECT ID,`DESC`,CONNECTSTR,SESSIONTIMEOUT FROM ZK where 1=0");
 			 rs = ps.executeQuery();
 //			 if(rs.next()){
 //				 return rs.getInt(1);
