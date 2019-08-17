@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 //@SpringBootApplication(exclude = {WebFluxAutoConfiguration.class,ReactorCoreAutoConfiguration.class})
 @SpringBootApplication
-@ComponentScan
+@ComponentScan(basePackages={"com.yasenagat.zkweb"})
 @ServletComponentScan
 //SpringBootServletInitializer for war打包方式
 public class ZkWebSpringBootApplication extends SpringBootServletInitializer{

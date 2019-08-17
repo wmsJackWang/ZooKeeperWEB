@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -25,10 +24,36 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
 public class ZkSpringBootConfiguration implements WebMvcConfigurer {
-	@Autowired
-    private Environment env;
+//	@Autowired
+//    private Environment env;
 	
-   
+    @Bean(name = "dataSource")
+    @Qualifier(value = "dataSource")
+    @Primary
+    //@ConfigurationProperties(prefix = "c3p0")
+    public DataSource getDataSource(){
+    	//DruidDataSource dataSource = new DruidDataSource();
+    	ComboPooledDataSource dataSource= org.springframework.boot.jdbc.DataSourceBuilder.create().type(ComboPooledDataSource.class).build();
+//    	dataSource.setJdbcUrl(env.getProperty("spring.datasource.url"));
+//        dataSource.setUser(env.getProperty("spring.datasource.username"));
+//        dataSource.setPassword(env.getProperty("spring.datasource.password"));
+//        try {
+//			dataSource.setDriverClass(env.getProperty("spring.datasource.driver-class-name"));
+//		} catch (PropertyVetoException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//        dataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("spring.datasource.initial-pool-size")));
+//        dataSource.setMinPoolSize(Integer.parseInt(env.getProperty("spring.datasource.min-pool-size")));
+//        dataSource.setMaxPoolSize(Integer.parseInt(env.getProperty("spring.datasource.max-pool-size")));
+//        dataSource.setAcquireIncrement(Integer.parseInt(env.getProperty("spring.datasource.acquire-increment")));
+//        dataSource.setIdleConnectionTestPeriod(Integer.parseInt(env.getProperty("spring.datasource.idle-connection-test-period")));
+//        dataSource.setMaxIdleTime(Integer.parseInt(env.getProperty("spring.datasource.max-idle-time")));
+//        dataSource.setMaxStatements(Integer.parseInt(env.getProperty("spring.datasource.max-statements")));
+//        dataSource.setAcquireRetryAttempts(Integer.parseInt(env.getProperty("spring.datasource.acquire-retry-attempts")));
+//        dataSource.setBreakAfterAcquireFailure(Boolean.parseBoolean(env.getProperty("spring.datasource.break-after-acquire-failure")));
+        return dataSource;
+    }
     
     @Override
 	public void addViewControllers(ViewControllerRegistry registry) {
@@ -46,7 +71,6 @@ public class ZkSpringBootConfiguration implements WebMvcConfigurer {
     public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
         // 默认语言
-        System.out.println("设置中国语言");
         slr.setDefaultLocale(Locale.CHINA);
         return slr;
     }
@@ -112,36 +136,5 @@ public class ZkSpringBootConfiguration implements WebMvcConfigurer {
 //    public ServletRegistrationBean<ZkCacheServlet> ZkCacheServlet(){
 //        return new ServletRegistrationBean<ZkCacheServlet>(new ZkCacheServlet(),"/cache/*");
 //    }
-    
-    
-    @Bean(name = "dataSource")
-    @Qualifier(value = "dataSource")
-    @Primary
-    //@ConfigurationProperties(prefix = "c3p0")
-    public DataSource getDataSource(){
-    	System.out.println("初始化数据源");
-    	//DruidDataSource dataSource = new DruidDataSource();
-    	ComboPooledDataSource dataSource= DataSourceBuilder.create().type(ComboPooledDataSource.class).build();
-    	System.out.println("dataSource==null:"+dataSource==null);
-    	dataSource.setJdbcUrl(env.getProperty("spring.datasource.url"));
-        dataSource.setUser(env.getProperty("spring.datasource.username"));
-        dataSource.setPassword(env.getProperty("spring.datasource.password"));
-        try {
-			dataSource.setDriverClass(env.getProperty("spring.datasource.driver-class-name"));
-		} catch (PropertyVetoException e) {
-			e.printStackTrace();
-			return null;
-		}
-        dataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("spring.datasource.initial-pool-size")));
-        dataSource.setMinPoolSize(Integer.parseInt(env.getProperty("spring.datasource.min-pool-size")));
-        dataSource.setMaxPoolSize(Integer.parseInt(env.getProperty("spring.datasource.max-pool-size")));
-        dataSource.setAcquireIncrement(Integer.parseInt(env.getProperty("spring.datasource.acquire-increment")));
-        dataSource.setIdleConnectionTestPeriod(Integer.parseInt(env.getProperty("spring.datasource.idle-connection-test-period")));
-        dataSource.setMaxIdleTime(Integer.parseInt(env.getProperty("spring.datasource.max-idle-time")));
-        dataSource.setMaxStatements(Integer.parseInt(env.getProperty("spring.datasource.max-statements")));
-        dataSource.setAcquireRetryAttempts(Integer.parseInt(env.getProperty("spring.datasource.acquire-retry-attempts")));
-        dataSource.setBreakAfterAcquireFailure(Boolean.parseBoolean(env.getProperty("spring.datasource.break-after-acquire-failure")));
-        return dataSource;
-    }
 }
 
