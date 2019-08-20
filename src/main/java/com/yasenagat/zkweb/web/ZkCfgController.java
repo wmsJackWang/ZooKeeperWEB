@@ -34,6 +34,7 @@ public class ZkCfgController{
 		
 		try {
 			log.info(new Date()+"");
+			log.info("页面zookeeper节点信息table刷新请求的参数数据:page:"+page+" rows:"+rows+" whereSql:"+whereSql);
 			Map<String, Object> _map = new HashMap<String, Object>();
 			whereSql = "";
 			_map.put("rows", zkCfgManager.query(page,rows,URLDecoder.decode(whereSql,"utf-8")));
