@@ -62,11 +62,21 @@ spring:
     min-pool-size: 5
     max-pool-size: 20
     acquire-increment: 3 
-    idle-connection-test-period: 60  
+    #每隔多少秒c3p0检测连接的有效性,因为mysql默认是8小时（28800）连接失效，因此设置一个时间小于8小时的值就行，
+    #像项目原作者使用这么短的时间进行检测，实在是浪费，不过项目原作者没有使用这个异步检测功能，因为testConnectionOnCheckin没有设置true
+#    idle-connection-test-period: 60  
+    #create by wmsjackdking 一小时检测一次
+    idle-connection-test-period: 3600
     max-idle-time: 60 
     max-statements: 100
     acquire-retry-attempts: 30
     break-after-acquire-failure: false
+    #设置为true，所有的连接都将检测其有效性，会影响性能，所以将其设置为false
+    #create by wmsjackdking
+    test-connection-on-checkout: false
+    #设置为true，异步检测连接的有效性
+    #create by wmsjackdking
+    test-connection-on-checkin: true
   resources:
     cache:
       period: 0

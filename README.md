@@ -23,7 +23,7 @@ yasenagat-zkweb svn: [http://code.taobao.org/svn/zkweb/](http://code.taobao.org/
 - jsp -> Thymeleaf
 
 ## zkWeb-zh_CN
-zookeeper web管理和监控界面，使用内置的H2数据库，此版本基于淘宝大神yasenagat的zkWeb源码基础之上进行了大幅升级和修改，有两种运行方式:
+zookeeper web管理和监控界面，使用内置的H2数据库，此版本基于github主zhitom的zkWeb源码基础之上进行了mysql数据源的升级和修改，有两种运行方式:
 
 1. 直接将war包放入tomcat即可运行！
 2. 直接运行: java -jar <jar-file>

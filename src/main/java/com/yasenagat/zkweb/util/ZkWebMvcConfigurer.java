@@ -10,7 +10,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 
 @Configuration
-public class ZkWenMvcConfigurer  implements WebMvcConfigurer {
+public class ZkWebMvcConfigurer  implements WebMvcConfigurer {
 
 	@Autowired
 	private LocaleChangeInterceptor localInterceptor;

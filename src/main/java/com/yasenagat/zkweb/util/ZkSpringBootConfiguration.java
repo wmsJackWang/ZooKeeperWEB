@@ -50,6 +50,11 @@ public class ZkSpringBootConfiguration{
         dataSource.setMaxStatements(Integer.parseInt(env.getProperty("spring.datasource.max-statements")));
         dataSource.setAcquireRetryAttempts(Integer.parseInt(env.getProperty("spring.datasource.acquire-retry-attempts")));
         dataSource.setBreakAfterAcquireFailure(Boolean.parseBoolean(env.getProperty("spring.datasource.break-after-acquire-failure")));
+        
+        //create by wmsjackdking --通过c3p0方式解决mysql数据库连接超时断开问题、
+        //添加完后，再打开网站就不会没有zookeeper节点配置数据了
+        dataSource.setTestConnectionOnCheckin(Boolean.parseBoolean(env.getProperty("spring.datasource.test-connection-on-checkin")));
+        dataSource.setTestConnectionOnCheckout(Boolean.parseBoolean(env.getProperty("spring.datasource.test-connection-on-checkout")));
         return dataSource;
     }
     
