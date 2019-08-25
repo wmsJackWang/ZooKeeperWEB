@@ -66,7 +66,10 @@ spring:
     #像项目原作者使用这么短的时间进行检测，实在是浪费，不过项目原作者没有使用这个异步检测功能，因为testConnectionOnCheckin没有设置true
 #    idle-connection-test-period: 60  
     #create by wmsjackdking 一小时检测一次
-    idle-connection-test-period: 3600
+#    idle-connection-test-period: 3600
+
+    #时长3600检测间隔时间不能消除连接失效问题，改成间隔时间为60
+    idle-connection-test-period: 60
     max-idle-time: 60 
     max-statements: 100
     acquire-retry-attempts: 30
